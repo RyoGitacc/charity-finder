@@ -11,15 +11,16 @@ type CharityListProps={
 
 export default function CharityList({cause}:CharityListProps) {
 const [orgs,setOrgs]=useState<orgType[]>([])
+const apiKey= import.meta.env.VITE_API_KEY;
 
 useEffect(()=>{
   const getData=async():Promise<void>=>{
-      const orgs = await axios.get<AxiosReturnOrgType>(`https://partners.every.org/v0.2/search/${cause}?apiKey=pk_live_f65d10f28d028bb4107e77bbaa7b999e&take=21`);
+      const orgs = await axios.get<AxiosReturnOrgType>(`https://partners.every.org/v0.2/search/${cause}?apiKey=${apiKey}&take=21`);
       
       setOrgs(orgs.data.nonprofits)
   }
   if(cause) getData();
-},[cause])
+},[apiKey, cause])
 
 
   return (

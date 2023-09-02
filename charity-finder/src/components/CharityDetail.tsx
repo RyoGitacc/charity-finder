@@ -11,6 +11,7 @@ import noImage from '../assets/noimage.png'
 
 export default function CharityDetail() {
     const [org,setOrg]=useState<orgType>();
+    const apiKey=import.meta.env.VITE_API_KEY;
     const einParams = useParams<{ein:string | undefined}>().ein;
     const navigate = useNavigate();
     const [isfavorited, setIsFavorited]=useState<boolean>(()=>{
@@ -27,7 +28,7 @@ export default function CharityDetail() {
     useEffect(()=>{
        const getOrg=async():Promise<void>=>{
         try{
-          const res=await axios.get(`https://partners.every.org/v0.2/search/${einParams}?apiKey=pk_live_f65d10f28d028bb4107e77bbaa7b999e`);
+          const res=await axios.get(`https://partners.every.org/v0.2/search/${einParams}?apiKey=${apiKey}`);
         //   console.log(res.data.nonprofits[0])
           setOrg(res.data.nonprofits[0]);
         }catch(err){
@@ -35,7 +36,7 @@ export default function CharityDetail() {
         }
        }
        getOrg();
-    },[einParams]);
+    },[apiKey, einParams]);
 
     const navigateToHome=():void=>{
         navigate("/")
