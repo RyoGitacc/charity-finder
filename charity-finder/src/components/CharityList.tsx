@@ -25,7 +25,7 @@ useEffect(()=>{
 
   return (
     <div className='charity-list'>
-      { orgs.length !== 0 ?
+       {  
          orgs.map((o,index)=>(
           <Link to={"/detail/" + o.ein} key={index} className='charity-card'>
            <div className='card-left'>
@@ -40,8 +40,6 @@ useEffect(()=>{
            </div>
         </Link>
         ))
-        :
-        <div>no result</div>
       }
     </div>
   )
